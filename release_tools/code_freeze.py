@@ -8,12 +8,10 @@ import plistlib
 import csv
 
 def create_branch(rel_name,rel_number):
-    os.system("git checkout main")
+    os.system("git clone https://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@github.com/sj1984-23/Test.git")
     os.system("git checkout -b %s/%s" % (rel_name,rel_number))
     os.system("git add *")
-    os.system("git commit -m 'Creating new branch'")
-    os.system("git remote remove origin")
-    os.system("git remote add origin https://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@github.com/sj1984-23/Test.git")
+    os.system("git commit -m 'Creating new branch for 'CodeFreeze''")
     os.system("git push --set-upstream %s/%s" % (rel_name,rel_number))
     print("Created a new branch for %s/%s" %(rel_name,rel_number))
 
