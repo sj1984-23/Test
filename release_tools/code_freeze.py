@@ -18,6 +18,8 @@ def create_branch(rel_name,rel_number):
 def main():
 
    array1 = []
+   rel_names = []
+   rel_ver = []
 
  # Create a branch with current release for code freeze
    rel_name=raw_input("Enter the release name \n")
@@ -32,15 +34,18 @@ def main():
 
     for row in reader:
         items = (row[0] + "/" + row[1])
+        rel_names.append(row[0])
+        rel_ver.append(row[1])
         array1.append(items)
-
+    print("Release names array has these")
+    print(rel_names)
     curr_release_branch=rel_name + "/" + rel_number
     print("Current release branch is")
     print(curr_release_branch)
     curr_release_index=array1.index(curr_release_branch)
     #curr_release_branch=array1[curr_release_index]
 
-    prev_release_index=curr_release_index-1
+    prev_release_index=curr_release_index+1
     prev_release_branch=array1[prev_release_index]
     print("Previous release is ")
     print(array1[prev_release_index])
@@ -48,19 +53,24 @@ def main():
     # Print diff of FF.csv in 'diff.txt'
     os.system("git diff %s:../featureflags/FF.csv %s:../featureflags/FF.csv > diff.txt" % (curr_release_branch,prev_release_branch))
 
+    next_release_index=curr_release_index+1
+    next_release_branch=array1[prev_release_index]
+    print("Next release is ")
+    print(array1[next_release_index])
+
     # Increment the release version in release.plist
     fileName=os.path.expanduser('../release.plist')
     if os.path.exists(fileName):
        pl=plistlib.readPlist(fileName)
 
-       # Update with new release name and version
-       pl['SLKReleaseName']=rel_name
+       # Update with next release name and version
+       pl['SLKReleaseName']=array1[next_release_index]
        plistlib.writePlist(pl, fileName)
-       pl['CFBundleShortVersionString']=rel_number
+       pl['CFBundleShortVersionString']=array1[next_release_index]
        plistlib.writePlist(pl, fileName)
        if 'SLKReleaseName' and 'CFBundleShortVersionString' in pl:
-          print 'New release name is %s\n' % pl['SLKReleaseName']
-          print 'New release version is %s\n' % pl['CFBundleShortVersionString']
+          print 'Next release name is %s\n' % pl['SLKReleaseName']
+          print 'Next release version is %s\n' % pl['CFBundleShortVersionString']
        else:
           print 'There is no release name in the plist\n'
     else:
