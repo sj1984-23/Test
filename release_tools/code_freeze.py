@@ -24,7 +24,7 @@ def main():
  # Create a branch with current release for code freeze
    rel_name=raw_input("Enter the release name \n")
    rel_number=raw_input("Enter the release number \n")
-   create_branch(rel_name,rel_number)
+   #create_branch(rel_name,rel_number)
 
    # Find the previous release
    # Search for this release in 'release.csv', one entry
@@ -39,7 +39,7 @@ def main():
         array1.append(items)
 
     curr_releaseName_index=rel_names.index(rel_name)
-    curr_version_index=rel_ver.index(rel_ver)
+    curr_version_index=rel_ver.index(rel_number)
     curr_release_branch=rel_name + "/" + rel_number
     print("Current release branch is")
     print(curr_release_branch)
