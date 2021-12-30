@@ -44,7 +44,7 @@ def main():
     curr_release_index=array1.index(curr_release_branch)
     #curr_release_branch=array1[curr_release_index]
 
-    prev_release_index=curr_release_index+1
+    prev_release_index=curr_release_index-1
     prev_release_branch=array1[prev_release_index]
     print("Previous release is ")
     print(array1[prev_release_index])
