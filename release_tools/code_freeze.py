@@ -51,7 +51,8 @@ def main():
 
     # Print diff of FF.csv in 'diff.txt'
 
-    os.system("git diff %s:../featureflags/FF.csv %s:../featureflags/FF.csv > diff.txt" % (curr_release_branch,prev_release_branch))
+    #os.system("git diff %s:../featureflags/FF.csv %s:../featureflags/FF.csv > diff.txt" % (curr_release_branch,prev_release_branch))
+    os.system("git diff Cake/1.2:featureflags/FF.csv Beer/1.1:featureflags/FF.csv")
     next_release_index=curr_releaseName_index+1
     next_version_index=curr_version_index+1
     next_release_branch=rel_names[next_release_index] + "/" + rel_ver[next_release_index]
