@@ -37,8 +37,9 @@ def main():
         rel_names.append(row[0])
         rel_ver.append(row[1])
         array1.append(items)
-    print("Release names array has these")
-    print(rel_names)
+
+    curr_releaseName_index=rel_names.index(rel_name)
+    curr_version_index=rel_ver.index(rel_ver)
     curr_release_branch=rel_name + "/" + rel_number
     print("Current release branch is")
     print(curr_release_branch)
@@ -53,10 +54,11 @@ def main():
     # Print diff of FF.csv in 'diff.txt'
     os.system("git diff %s:../featureflags/FF.csv %s:../featureflags/FF.csv > diff.txt" % (curr_release_branch,prev_release_branch))
 
-    next_release_index=curr_release_index+1
-    next_release_branch=array1[prev_release_index]
+    next_release_index=curr_releaseName_index+1
+    next_version_index=curr_version_index+1
+    next_release_branch=rel_names[next_release_index] + "/" + rel_ver[next_release_index]
     print("Next release is ")
-    print(array1[next_release_index])
+    print(next_release_branch)
 
     # Increment the release version in release.plist
     fileName=os.path.expanduser('../release.plist')
@@ -64,9 +66,9 @@ def main():
        pl=plistlib.readPlist(fileName)
 
        # Update with next release name and version
-       pl['SLKReleaseName']=array1[next_release_index]
+       pl['SLKReleaseName']=rel_names[next_release_index]
        plistlib.writePlist(pl, fileName)
-       pl['CFBundleShortVersionString']=array1[next_release_index]
+       pl['CFBundleShortVersionString']=rel_ver[next_release_index]
        plistlib.writePlist(pl, fileName)
        if 'SLKReleaseName' and 'CFBundleShortVersionString' in pl:
           print 'Next release name is %s\n' % pl['SLKReleaseName']

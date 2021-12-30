@@ -1,5 +1,5 @@
 diff --git a/featureflags/FF.csv b/featureflags/FF.csv
-index 2e8aa5d..f457d43 100644
+index 2e8aa5d..2fea3f8 100644
 --- a/featureflags/FF.csv
 +++ b/featureflags/FF.csv
 @@ -2,4 +2,6 @@ Flag_A, ON
@@ -9,5 +9,5 @@ index 2e8aa5d..f457d43 100644
 -Flag_E, OFF
 \ No newline at end of file
 +Flag_E, OFF
-+Flag_test,ON
-+Flag_test1.OFF
++Flag_F, OFF
++
