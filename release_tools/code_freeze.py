@@ -9,14 +9,14 @@ import csv
 
 def create_branch(rel_name,rel_number):
     #os.system("git clone https://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@github.com/sj1984-23/Test.git")
-    os.system("git checkout -b %s/%s" % (rel_name,rel_number))
+    #os.system("git checkout -b %s/%s" % (rel_name,rel_number))
+    os.system("git checkout -b test")
     os.system("git add *")
     os.system("git commit -m 'Creating new branch for 'CodeFreeze''")
-    os.system("git push --set-upstream %s/%s" % (rel_name,rel_number))
+    os.system("git push https://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@github.com/sj1984-23/Test.git")
     print("Created a new branch for %s/%s" %(rel_name,rel_number))
 
 def main():
-
    array1 = []
    rel_names = []
    rel_ver = []
@@ -24,7 +24,7 @@ def main():
  # Create a branch with current release for code freeze
    rel_name=raw_input("Enter the release name \n")
    rel_number=raw_input("Enter the release number \n")
-   #create_branch(rel_name,rel_number)
+   create_branch(rel_name,rel_number)
 
    # Find the previous release
    # Search for this release in 'release.csv', one entry
@@ -46,7 +46,7 @@ def main():
     curr_release_index=array1.index(curr_release_branch)
     #curr_release_branch=array1[curr_release_index]
 
-    prev_release_index=curr_release_index+1
+    prev_release_index=curr_release_index-1
     prev_release_branch=array1[prev_release_index]
     print("Previous release is ")
     print(array1[prev_release_index])
@@ -57,8 +57,8 @@ def main():
     next_release_index=curr_releaseName_index+1
     next_version_index=curr_version_index+1
     next_release_branch=rel_names[next_release_index] + "/" + rel_ver[next_release_index]
-    print("Next release is ")
-    print(next_release_branch)
+    #print("Next release is ")
+    #print(next_release_branch)
 
     # Increment the release version in release.plist
     fileName=os.path.expanduser('../release.plist')
@@ -71,8 +71,8 @@ def main():
        pl['CFBundleShortVersionString']=rel_ver[next_release_index]
        plistlib.writePlist(pl, fileName)
        if 'SLKReleaseName' and 'CFBundleShortVersionString' in pl:
-          print 'Next release name is %s\n' % pl['SLKReleaseName']
-          print 'Next release version is %s\n' % pl['CFBundleShortVersionString']
+          print 'Next release name is updated to %s\n' % pl['SLKReleaseName']
+          print 'Next release version updated to is %s\n' % pl['CFBundleShortVersionString']
        else:
           print 'There is no release name in the plist\n'
     else:
