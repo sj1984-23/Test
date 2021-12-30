@@ -61,7 +61,6 @@ def main():
        if 'SLKReleaseName' and 'CFBundleShortVersionString' in pl:
           print 'New release name is %s\n' % pl['SLKReleaseName']
           print 'New release version is %s\n' % pl['CFBundleShortVersionString']
-          print '\n The plist full contents is %s\n' % pl
        else:
           print 'There is no release name in the plist\n'
     else:
