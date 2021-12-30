@@ -50,7 +50,7 @@ def main():
     print(array1[prev_release_index])
 
     # Print diff of FF.csv in 'diff.txt'
-    
+
     os.system("git diff %s:../featureflags/FF.csv %s:../featureflags/FF.csv > diff.txt" % (curr_release_branch,prev_release_branch))
     next_release_index=curr_releaseName_index+1
     next_version_index=curr_version_index+1
@@ -78,4 +78,3 @@ def main():
 
 if __name__ == '__main__':
    main()
-
