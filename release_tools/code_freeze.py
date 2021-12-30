@@ -8,7 +8,7 @@ import plistlib
 import csv
 
 def create_branch(rel_name,rel_number):
-    os.system("git clone https://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@github.com/sj1984-23/Test.git")
+    #os.system("git clone https://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@github.com/sj1984-23/Test.git")
     os.system("git checkout -b %s/%s" % (rel_name,rel_number))
     os.system("git add *")
     os.system("git commit -m 'Creating new branch for 'CodeFreeze''")
