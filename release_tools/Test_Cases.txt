@@ -17,7 +17,7 @@ Result:For a ‘new’ branch, it should create the ‘branch’ and update the 
 	 1.0
 
 
-Result: It fails saying the ‘Cake/1.0’ is not in the ‘releng/release.csv’ list.
+Result: It fails saying the ‘Cake/1.0’ is not in the ‘releng/release_info.csv’ list.
 
 3. TestCase3: Entering ‘branch’ or ‘release’ that already exists:
   Enter the release name:
@@ -27,7 +27,7 @@ Result: It fails saying the ‘Cake/1.0’ is not in the ‘releng/release.csv�
 
 Result: If ‘branch’ exists, it won’t create a ‘branch’, it will exit out of the script.
 
-4. TestCase4:  Entering ‘any’ release mentioned in the ‘release.csv’ file like: ‘Date/1.3’
+4. TestCase4:  Entering ‘any’ release mentioned in the ‘release_info.csv’ file like: ‘Date/1.3’
    Enter the release name:
    Date
 	 Enter the release number:
@@ -48,3 +48,5 @@ It should throw an ‘error’ saying that all ‘release’ names should start 
    chocolate
 	 Enter the release number:
 	 1.3
+
+It should throw an ‘error’ saying that all ‘release’ name doesnt exist in the release_info.csv.
