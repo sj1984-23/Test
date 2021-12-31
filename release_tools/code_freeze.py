@@ -7,13 +7,19 @@ import os
 import plistlib
 import csv
 
-def create_branch(rel_name,rel_number):
-    #os.system("git clone https://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@github.com/sj1984-23/Test.git")
-    os.system("git checkout -b %s/%s" % (rel_name,rel_number))
-    os.system("git add *")
-    os.system("git commit -m 'Creating new branch for 'CodeFreeze''")
-    os.system("git push --set-upstream %s/%s" % (rel_name,rel_number))
-    print("Created a new branch for %s/%s" %(rel_name,rel_number))
+def create_branch(rel_branch):
+    os.system("git branch | grep %s" % (rel_branch))
+    if [ os.system("git branch | grep %s" % (rel_branch) == rel_branch ]:
+       print("Branch exists..exiting")
+       quit()
+    else:
+       os.system("git remote -v")
+       os.system("git checkout main")
+       os.system("git checkout -b %s/%s" % (rel_name,rel_number))
+       os.system("git add *")
+       os.system("git commit -m 'Creating new branch for 'CodeFreeze''")
+       os.system("git push --set-upstream %s/%s" % (rel_name,rel_number))
+       print("Created a new branch for %s/%s" %(rel_name,rel_number))
 
 def main():
 
@@ -24,7 +30,7 @@ def main():
  # Create a branch with current release for code freeze
    rel_name=raw_input("Enter the release name \n")
    rel_number=raw_input("Enter the release number \n")
-   #create_branch(rel_name,rel_number)
+
 
    # Find the previous release
    # Search for this release in 'release.csv', one entry
@@ -38,6 +44,8 @@ def main():
         rel_ver.append(row[1])
         array1.append(items)
 
+    rel_branch=rel_name + "/" +rel_number
+    create_branch(rel_branch)
     curr_releaseName_index=rel_names.index(rel_name)
     curr_version_index=rel_ver.index(rel_number)
     curr_release_branch=rel_name + "/" + rel_number
