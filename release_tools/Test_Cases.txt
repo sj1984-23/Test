@@ -3,9 +3,9 @@ Test Cases for ‘Code_freeze.py’
 
 1. TestCase1: Entering the values given in ‘release_info.csv’
   Enter the release name:
-    Cake
+  Cake
   Enter the release number:
-		1.2
+  1.2
 
 Result:For a ‘new’ branch, it should create the ‘branch’ and update the ‘plist’ with the next release.
 
@@ -13,8 +13,8 @@ Result:For a ‘new’ branch, it should create the ‘branch’ and update the 
 2. TestCase2: Entering incorrect ‘release’ number:
    Enter the release name:
    Cake
-	 Enter the release number:
-	 1.0
+   Enter the release number:
+   1.0
 
 
 Result: It fails saying the ‘Cake/1.0’ is not in the ‘releng/release_info.csv’ list.
@@ -23,30 +23,30 @@ Result: It fails saying the ‘Cake/1.0’ is not in the ‘releng/release_info.
   Enter the release name:
   Cake
   Enter the release number:
-	1.2
+  1.2
 
 Result: If ‘branch’ exists, it won’t create a ‘branch’, it will exit out of the script.
 
 4. TestCase4:  Entering ‘any’ release mentioned in the ‘release_info.csv’ file like: ‘Date/1.3’
    Enter the release name:
    Date
-	 Enter the release number:
-	 1.3
+   Enter the release number:
+   1.3
 
 Result: It should create a ‘new’ branch, show the ‘diff’ from previous branch, and update the ‘plist’4.
 
 4. TestCase4: Entering ‘lower’ case
    Enter the release name:
    date
-	 Enter the release number:
-	 1.3
+   Enter the release number:
+   1.3
 
 It should throw an ‘error’ saying that all ‘release’ names should start with ‘upper’’ case.
 
 5. TestCase4: Entering value not in the 'release' list
    Enter the release name:
    chocolate
-	 Enter the release number:
-	 1.3
+   Enter the release number:
+   1.3
 
 It should throw an ‘error’ saying that all ‘release’ name doesnt exist in the release_info.csv.
