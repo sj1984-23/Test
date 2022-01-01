@@ -8,18 +8,23 @@ import plistlib
 import csv
 
 def create_branch(rel_branch):
-    os.system("git branch | grep %s" % (rel_branch))
-    if [ os.system("git branch | grep %s" % (rel_branch) == rel_branch ]:
-       print("Branch exists..exiting")
-       quit()
-    else:
-       os.system("git remote -v")
-       os.system("git checkout main")
-       os.system("git checkout -b %s/%s" % (rel_name,rel_number))
-       os.system("git add *")
-       os.system("git commit -m 'Creating new branch for 'CodeFreeze''")
-       os.system("git push --set-upstream %s/%s" % (rel_name,rel_number))
-       print("Created a new branch for %s/%s" %(rel_name,rel_number))
+    #os.system("git branch | grep %s" % (rel_branch))
+
+    os.system('git branch | grep %s' % ( rel_branch ) + ">temp.txt")
+    file=open("temp.txt", "r")
+
+    for line in file:
+        if rel_branch in line:
+           print("%s is an existing branch" % rel_branch)
+           quit()
+    os.system("git remote -v")
+    os.system("git rm temp.txt")
+    os.system("git checkout main")
+    os.system("git checkout -b %s/%s" % (rel_name,rel_number))
+    os.system("git add *")
+    os.system("git commit -m 'Creating new branch for 'CodeFreeze''")
+    os.system("git push --set-upstream %s/%s" % (rel_name,rel_number))
+    print("Created a new branch for %s/%s" %(rel_name,rel_number))
 
 def main():
 
