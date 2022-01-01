@@ -1,13 +1,17 @@
-# This script will do a code freeze by:
+###################################
+# author: Swapna Jandhyala
+
+#This script will do a code freeze by:
 # Create a 'branch' for the 'current' release that the user enters
 # Generate feature flag report between 'current' and 'previous' branch
 # Update the 'plist' file to next version
 
+###################################
 import os
 import plistlib
 import csv
 
-def create_branch(rel_branch):
+def create_branch(rel_branch,curr_release_branch,prev_release_branch):
     #os.system("git branch | grep %s" % (rel_branch))
 
     os.system('git branch | grep %s' % ( rel_branch ) + ">temp.txt")
@@ -20,11 +24,13 @@ def create_branch(rel_branch):
     os.system("git remote -v")
     os.system("git rm temp.txt")
     os.system("git checkout main")
-    os.system("git checkout -b %s/%s" % (rel_name,rel_number))
+    os.system("git checkout -b %s" % (rel_branch))
+    os.system("cp ../featureflags/FF.csv diff.txt")
+    os.system("git diff %s:featureflags/FF.csv %s:featureflags/FF.csv > diff.txt" % (curr_release_branch,prev_release_branch))
     os.system("git add *")
     os.system("git commit -m 'Creating new branch for 'CodeFreeze''")
-    os.system("git push --set-upstream %s/%s" % (rel_name,rel_number))
-    print("Created a new branch for %s/%s" %(rel_name,rel_number))
+    os.system("git push https://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@github.com/sj1984-23/Test.git")
+    print("Created a new branch for %s" %(rel_branch))
 
 def main():
 
@@ -50,7 +56,6 @@ def main():
         array1.append(items)
 
     rel_branch=rel_name + "/" +rel_number
-    create_branch(rel_branch)
     curr_releaseName_index=rel_names.index(rel_name)
     curr_version_index=rel_ver.index(rel_number)
     curr_release_branch=rel_name + "/" + rel_number
@@ -64,8 +69,9 @@ def main():
     print("Previous release is ")
     print(array1[prev_release_index])
 
+    create_branch(rel_branch,curr_release_branch,prev_release_branch)
     # Print diff of FF.csv in 'diff.txt'
-    os.system("git diff %s:featureflags/FF.csv %s:featureflags/FF.csv > diff.txt" % (curr_release_branch,prev_release_branch))
+
 
     next_release_index=curr_releaseName_index+1
     next_version_index=curr_version_index+1
